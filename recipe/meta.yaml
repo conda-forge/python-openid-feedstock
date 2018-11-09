@@ -1,28 +1,24 @@
 {%set name = "python-openid" %}
 {%set version = "2.2.5" %}
-{%set compress_type = "tar.gz" %}
-{%set hash_type = "sha256" %}
-{%set hash_val = "92c51c3ecec846cbec4aeff11f9ff47303d4a63f93b0e6ac0ec02a091fed70ef" %}
-{%set build_num = "0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ compress_type }}
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  {{ hash_type }}: {{ hash_val }}
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 92c51c3ecec846cbec4aeff11f9ff47303d4a63f93b0e6ac0ec02a091fed70
 
 build:
   skip: True  # [py3k]
-  number: {{ build_num }}
-  script: python setup.py install
+  number: 1000
+  script: "{{ PYTHON }} -m pip install . -vvv"
 
 requirements:
-  build:
+   host:
     - python
-
+    - pip
   run:
     - python
 
